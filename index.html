@@ -1,0 +1,1290 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG & TCFD)</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root{
+      --blue:#0B1E3B;
+      --blue2:#102A52;
+      --yellow:#C8A100;      /* أصفر غامق */
+      --yellowHover:#B08C00; /* أغمق للهوفر */
+      --green:#1BAA74;
+
+      --bg:#F6F8FB;
+      --card:#fff;
+      --text:#0A1630;
+      --muted:#5B6678;
+      --border:#E5E9F0;
+      --shadow: 0 10px 28px rgba(10,22,48,.10);
+      --shadow2: 0 18px 50px rgba(10,22,48,.14);
+      --r:16px;
+
+      --headerH: 290px;
+
+      --anim: cubic-bezier(.16,1,.3,1);
+
+      /* ✅ Responsive sizes */
+      --pad: 16px;
+      --h1: 20px;
+      --small: 14px;
+      --chartH: 360px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Cairo",system-ui,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 450px at 20% 10%, rgba(27,170,116,.10), transparent 60%),
+        radial-gradient(850px 520px at 85% 12%, rgba(200,161,0,.10), transparent 55%),
+        radial-gradient(700px 450px at 60% 70%, rgba(11,30,59,.10), transparent 60%),
+        linear-gradient(180deg, #ffffff, var(--bg));
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ✅ container responsive */
+    .container{width:min(1200px, 92vw); margin:0 auto; padding-inline: 0;}
+
+    /* خلفية متحركة خفيفة */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      z-index:-1;
+      background:
+        radial-gradient(650px 360px at 18% 30%, rgba(200,161,0,.10), transparent 60%),
+        radial-gradient(720px 420px at 80% 18%, rgba(27,170,116,.10), transparent 62%),
+        radial-gradient(820px 520px at 55% 78%, rgba(11,30,59,.10), transparent 62%);
+      filter: blur(2px);
+      animation: floatBg 14s var(--anim) infinite alternate;
+      opacity:.9;
+    }
+    @keyframes floatBg{
+      from{ transform: translate3d(0,0,0) scale(1); }
+      to{ transform: translate3d(0,-10px,0) scale(1.02); }
+    }
+
+    header{
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      color:#fff;
+      border-bottom:4px solid rgba(200,161,0,.65);
+      top:0;
+      z-index: 50;
+      animation: fadeDown .45s var(--anim) both;
+    }
+    @keyframes fadeDown{
+      from{opacity:0; transform: translateY(-10px)}
+      to{opacity:1; transform: translateY(0)}
+    }
+
+    .top{padding:18px 0 16px;text-align:center}
+    .brand{
+      display:flex;flex-direction:column;align-items:center;gap:10px;
+      margin-bottom:14px;
+      padding-inline: 10px;
+    }
+    /* ✅ حذف الإطار حول اللوجو */
+    .brand img{
+      width:min(360px, 85vw);
+      height:auto;
+      aspect-ratio: 358 / 130;
+      object-fit:contain;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      animation: popIn .6s var(--anim) both;
+    }
+    @keyframes popIn{
+      from{opacity:0; transform: scale(.96)}
+      to{opacity:1; transform: scale(1)}
+    }
+
+    .brand h1{margin:0;font-size:var(--h1);font-weight:700;line-height:1.4}
+    .brand small{font-size:var(--small);font-weight:700;color:rgba(255,255,255,.9)}
+
+    nav{
+      display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+      margin-bottom:12px;
+      padding-inline: 10px;
+    }
+    nav a{
+      padding:9px 14px;border-radius:14px;font-weight:900;
+      color:rgba(255,255,255,.95);
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.08);
+      transition: .18s var(--anim);
+      will-change: transform;
+      white-space: nowrap;
+    }
+    /* ✅ hover أصفر غامق للتابات */
+    nav a:hover{
+      background: rgba(200,161,0,.24);
+      border-color: rgba(200,161,0,.70);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(10,22,48,.18);
+    }
+    nav a.active{
+      background: linear-gradient(135deg, rgba(200,161,0,.30), rgba(200,161,0,.14));
+      border-color: rgba(200,161,0,.70);
+      transform: translateY(-1px);
+    }
+
+    .update{
+      display:flex;justify-content:center;align-items:center;gap:8px;
+      font-weight:700;color:rgba(255,255,255,.95);
+      padding-inline: 10px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 6px rgba(27,170,116,.3);
+      animation: pulse 1.6s ease-in-out infinite;
+      flex:0 0 auto;
+    }
+    @keyframes pulse{
+      0%,100%{transform:scale(1); opacity:.9}
+      50%{transform:scale(1.15); opacity:1}
+    }
+
+    main{padding:18px 0 44px}
+    .view{display:none}
+    .view.active{display:block; animation: fadeUp .35s var(--anim) both;}
+    @keyframes fadeUp{
+      from{opacity:0; transform: translateY(8px)}
+      to{opacity:1; transform: translateY(0)}
+    }
+
+    .panel{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--r);
+      box-shadow:var(--shadow);
+      padding: var(--pad);
+      transition:.18s var(--anim);
+    }
+    .panel:hover{box-shadow: var(--shadow2); transform: translateY(-2px)}
+    .panel h2{margin:0 0 10px;color:var(--blue);font-size:18px}
+    .panel p{margin:0;color:var(--muted);font-weight:700;line-height:1.8}
+
+    .article{
+      margin-top:14px;
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .sectionTitle{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
+      margin:0 0 12px;
+      padding: 8px 2px;
+      flex-wrap: wrap;
+    }
+    .sectionTitle > div{
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 16px;
+    }
+    .sectionTitle span{
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      margin-inline-start: 10px;
+    }
+
+    /* ✅ Cards grid responsive (بدل span ثابت) */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      min-width: 0;
+      transition:.18s var(--anim);
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow: var(--shadow2);
+      border-color: rgba(200,161,0,.35);
+    }
+    .cardTitle{
+      font-weight: 900;
+      color: var(--blue);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .cardValue{
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .cardValue small{
+      display:block;
+      margin-top:6px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border:1px solid var(--border);
+      background: #fff;
+      box-shadow: var(--shadow);
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+    .badge b{color: var(--blue)}
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(200,161,0,.35);
+      background: rgba(200,161,0,.12);
+      color: #6A5600;
+      font-weight: 900;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    /* ✅ Filters responsive */
+    .filters{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+    }
+    .filters.wide .field{grid-column: span 3}
+    .filters .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+    .filters label{
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 900;
+      padding-inline: 2px;
+    }
+    select, input{
+      border-radius: 14px;
+      padding: 11px 12px;
+      border:1px solid var(--border);
+      background:#fff;
+      color: var(--text);
+      outline:none;
+      font-weight: 800;
+      font-size: 13px;
+      transition: .18s var(--anim);
+      width: 100%;
+    }
+    select:focus, input:focus{
+      border-color: rgba(200,161,0,.70);
+      box-shadow: 0 0 0 4px rgba(200,161,0,.12);
+    }
+
+    .btn{
+      border:1px solid rgba(11,30,59,.18);
+      background:#fff;
+      padding:10px 12px;
+      border-radius: 14px;
+      font-weight: 900;
+      font-size: 13px;
+      cursor:pointer;
+      transition: .18s var(--anim);
+      box-shadow: 0 8px 18px rgba(10,22,48,.08);
+      will-change: transform;
+    }
+    .btn:hover{
+      transform: translateY(-2px);
+      border-color: rgba(200,161,0,.70);
+      box-shadow: 0 12px 24px rgba(10,22,48,.12);
+      background: rgba(200,161,0,.10);
+    }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(200,161,0,.18), rgba(200,161,0,.10));
+      border-color: rgba(200,161,0,.35);
+    }
+    .btn.primary:hover{
+      background: linear-gradient(135deg, rgba(200,161,0,.28), rgba(200,161,0,.14));
+      border-color: rgba(200,161,0,.75);
+    }
+
+    /* ✅ Chart height responsive */
+    .chartBox{
+      height: var(--chartH);
+      width: 100%;
+      position: relative;
+    }
+
+    .tableWrap{
+      overflow:auto;
+      border-radius: var(--r);
+      border:1px solid var(--border);
+      background:#fff;
+      box-shadow: var(--shadow);
+      animation: fadeUp .35s var(--anim) both;
+    }
+    table{
+      width:100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+    th, td{
+      padding: 12px;
+      border-bottom:1px solid var(--border);
+      text-align: right;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    th{
+      background: rgba(11,30,59,.06);
+      color: var(--blue);
+      position: sticky;
+      top:0;
+      z-index: 2;
+    }
+    tr:hover td{ background: rgba(200,161,0,.06); }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 12px;
+      border:1px solid rgba(11,30,59,.14);
+      background: rgba(11,30,59,.04);
+      color: var(--blue);
+    }
+    .chip.ok{border-color: rgba(27,170,116,.35); background: rgba(27,170,116,.10); color: #0E6B48}
+    .chip.mid{border-color: rgba(200,161,0,.40); background: rgba(200,161,0,.10); color: #6A5600}
+    .chip.no{border-color: rgba(200,50,50,.35); background: rgba(200,50,50,.08); color: #7A1A1A}
+
+    /* Countdown */
+    .countdown{
+      position: fixed;
+      inset-inline-start: 14px;
+      bottom: 14px;
+      z-index: 60;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.95);
+      border:1px solid var(--border);
+      box-shadow: 0 14px 40px rgba(10,22,48,.18);
+      backdrop-filter: blur(8px);
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 12px;
+      animation: floatCard 2.2s ease-in-out infinite;
+      max-width: min(520px, 94vw);
+    }
+    @keyframes floatCard{
+      0%,100%{transform: translateY(0)}
+      50%{transform: translateY(-3px)}
+    }
+    .countdown .n{
+      width:36px;height:36px;border-radius: 14px;
+      display:flex;align-items:center;justify-content:center;
+      background: rgba(11,30,59,.08);
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 14px;
+      flex:0 0 auto;
+    }
+    .countdown .showNow{
+      padding: 9px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(200,161,0,.55);
+      background: rgba(200,161,0,.14);
+      color:#6A5600;
+      font-weight: 900;
+      cursor:pointer;
+      transition:.18s var(--anim);
+      white-space: nowrap;
+    }
+    .countdown .showNow:hover{
+      background: rgba(200,161,0,.24);
+      border-color: rgba(200,161,0,.85);
+      transform: translateY(-2px);
+    }
+
+    /* Modal */
+    .overlay{
+      position: fixed;
+      inset:0;
+      background: rgba(11,30,59,.55);
+      z-index: 100;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 16px;
+    }
+    .overlay.show{display:flex}
+    .modal{
+      width: min(860px, 96vw);
+      background: #fff;
+      border-radius: 18px;
+      border:1px solid rgba(11,30,59,.12);
+      box-shadow: 0 30px 80px rgba(10,22,48,.35);
+      overflow:hidden;
+      transform: translateY(8px);
+      opacity: 0;
+      animation: pop .22s var(--anim) forwards;
+      max-height: min(86vh, 920px);
+      display:flex;
+      flex-direction:column;
+    }
+    @keyframes pop{ to{transform: translateY(0); opacity: 1;} }
+    .modalHead{
+      background: linear-gradient(135deg, rgba(11,30,59,.95), rgba(16,42,82,.95));
+      color:#fff;
+      padding: 14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      border-bottom: 4px solid rgba(200,161,0,.55);
+    }
+    .modalHead .title{
+      font-weight: 900;
+      font-size: 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .closeX{
+      border:0;
+      width:38px;height:38px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.12);
+      color:#fff;
+      font-weight: 900;
+      cursor:pointer;
+      transition:.18s var(--anim);
+      flex:0 0 auto;
+    }
+    .closeX:hover{
+      background: rgba(200,161,0,.24);
+      transform: translateY(-2px);
+    }
+    .modalBody{
+      padding: 16px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 2;
+      overflow:auto;
+    }
+    .modalBody b{color: var(--blue)}
+    .modalFoot{
+      padding: 14px 16px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      background: rgba(11,30,59,.03);
+    }
+
+    /* ===================== Breakpoints ===================== */
+
+    /* ✅ large tablets / small laptops */
+    @media (max-width: 992px){
+      :root{
+        --pad: 14px;
+        --h1: 18px;
+        --small: 13px;
+        --chartH: 320px;
+      }
+      .filters.wide .field{grid-column: span 6}
+      table{min-width: 820px}
+    }
+
+    /* ✅ tablets / big phones */
+    @media (max-width: 768px){
+      :root{
+        --pad: 14px;
+        --h1: 17px;
+        --small: 13px;
+        --chartH: 300px;
+      }
+      nav{gap:10px}
+      nav a{padding:10px 12px;border-radius: 14px;font-size: 13px}
+      .sectionTitle{align-items:flex-start}
+      .countdown{flex-wrap:wrap; justify-content:flex-start}
+      .countdown .showNow{width:auto}
+    }
+
+    /* ✅ small phones */
+    @media (max-width: 480px){
+      :root{
+        --pad: 12px;
+        --h1: 16px;
+        --small: 12px;
+        --chartH: 260px;
+      }
+      .container{width:min(1200px, 94vw)}
+      nav{gap:8px}
+      nav a{flex:1 1 auto; text-align:center}
+      .update{flex-wrap:wrap}
+      table{min-width: 760px}
+      th, td{padding: 10px; font-size: 12px}
+    }
+  </style>
+</head>
+
+<body>
+  <header id="siteHeader">
+    <div class="container">
+      <div class="top">
+        <div class="brand">
+          <img src="./لوجو الهيئة.png" alt="شعار الهيئة العامة للرقابة المالية">
+          <h1>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي</h1>
+          <small>(ESG &amp; TCFD)</small>
+        </div>
+
+        <nav id="tabs">
+          <a href="#home" data-view="home" class="active">الرئيسية</a>
+          <a href="#quant" data-view="quant">التحليل الكمي</a>
+          <a href="#qual" data-view="qual">التحليل الكيفي الفني</a>
+          <a href="#whitelist" data-view="whitelist">القائمة البيضاء</a>
+        </nav>
+
+        <div class="update">
+          <span class="dot"></span>
+          <span id="lastUpdate">آخر تحديث: 09/01/2026</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ✅ عدّ تنازلي + زر عرض فوري -->
+  <div class="countdown" id="countdownBox" aria-live="polite">
+    <div class="n" id="countdownN">30</div>
+    <div>سيظهر <b>دليل الاستخدام</b> بعد ثوانٍ</div>
+    <button class="showNow" id="showNowBtn" type="button">عرض الآن</button>
+  </div>
+
+  <!-- نافذة التعليمات -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="تعليمات الاستخدام">
+    <div class="modal">
+      <div class="modalHead">
+        <div class="title">📌 تعليمات الاستخدام</div>
+        <button class="closeX" id="closeModal" type="button" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modalBody" id="modalBody">
+        <div style="margin-bottom:10px;color:var(--blue);font-weight:900;">مرحبًا بك</div>
+        <div>
+          استخدم التابات بالأعلى للتنقل بين <b>التحليل الكمي</b> و<b>التحليل الكيفي الفني</b> و<b>القائمة البيضاء</b>.
+          المحتوى أسفل العنوان يتغير داخل نفس الصفحة بدون فتح صفحات جديدة.
+        </div>
+        <div style="margin-top:10px;">
+          في <b>التحليل الكيفي الفني</b>: اختر <b>ESG</b> أو <b>TCFD</b> ثم نوع الشركات (مقيدة/غير مقيدة).
+          عند اختيار <b>مقيدة بالبورصة</b> ستجد في خانة <b>القطاع (اختياري)</b> خيارات <b>الخدمات المالية غير المصرفية</b> و<b>القطاعات الأخرى</b> بالإضافة إلى إجمالي المقيدة.
+        </div>
+        <div style="margin-top:10px;">
+          في <b>القائمة البيضاء</b>: يمكنك البحث والتصفية وعرض أفضل الشركات وفقًا للدرجات.
+        </div>
+      </div>
+      <div class="modalFoot">
+        <button class="btn primary" id="closeModal2" type="button">فهمت</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="view-home" class="view active">
+      <div class="panel">
+        <h2>مرحبًا بك</h2>
+        <p>
+          استخدم التابات بالأعلى للتنقل بين <b>التحليل الكمي</b> و<b>التحليل الكيفي الفني</b> و<b>القائمة البيضاء</b>.
+          المحتوى بالأسفل يتغير داخل نفس الصفحة بدون فتح صفحات جديدة.
+        </p>
+
+        <div class="article">
+          مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري الهيئة العامة للرقابة المالية رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكمي والتحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
+        </div>
+
+        <div class="badge">
+          ✅ <span>نصيحة: ابدأ بـ <b>التحليل الكيفي الفني</b> ثم قارن بنتائج <b>التحليل الكمي</b> للحصول على صورة أشمل.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUANT -->
+    <section id="view-quant" class="view">
+      <div class="sectionTitle">
+        <div>التحليل الكمي <span>قياس الالتزام الشكلي (Compliance Analysis)</span></div>
+        <span class="pill">البيانات: ESG &amp; TCFD</span>
+      </div>
+
+      <!-- ✅ لم أعد أستخدم span 3 في inline styles. الـ grid هيتولى التوزيع -->
+      <div class="grid">
+        <div class="card">
+          <div class="cardTitle">عدد الشركات المخاطبة بـ ESG</div>
+          <div class="cardValue" id="q_esg_addressed">—</div>
+        </div>
+        <div class="card">
+          <div class="cardTitle">عدد الشركات الملتزمة بـ ESG</div>
+          <div class="cardValue" id="q_esg_compliant">—<small id="q_esg_rate">—</small></div>
+        </div>
+        <div class="card">
+          <div class="cardTitle">عدد الشركات المخاطبة بـ TCFD</div>
+          <div class="cardValue" id="q_tcfd_addressed">—</div>
+        </div>
+        <div class="card">
+          <div class="cardTitle">عدد الشركات الملتزمة بـ TCFD</div>
+          <div class="cardValue" id="q_tcfd_compliant">—<small id="q_tcfd_rate">—</small></div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:12px;">
+        <div class="card">
+          <div class="cardTitle">التحليل العام لالتزام الشركات بإفصاحات الاستدامة والمناخ (ESG &amp; TCFD)</div>
+          <div class="chartBox"><canvas id="overallChart"></canvas></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle">الشركات غير المقيدة بالبورصة — ESG حسب القطاع المالي</div>
+          <div class="chartBox"><canvas id="nonListedESGChart"></canvas></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle">الشركات غير المقيدة بالبورصة — TCFD حسب القطاع المالي</div>
+          <div class="chartBox"><canvas id="nonListedTCFDChart"></canvas></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle">الشركات المقيدة بالبورصة — أداء الالتزام ESG &amp; TCFD</div>
+          <div class="chartBox"><canvas id="listedOverallChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUAL -->
+    <section id="view-qual" class="view">
+      <div class="sectionTitle">
+        <div>التحليل الكيفي الفني <span>تقييم جودة المحتوى (Content Analysis)</span></div>
+        <span class="pill" id="qualPill">يتم التحديث حسب الفلاتر</span>
+      </div>
+
+      <div class="panel" style="margin-bottom:14px;">
+        <div class="filters wide">
+          <div class="field">
+            <label for="qualMetric">المعيار</label>
+            <select id="qualMetric">
+              <option value="esg">ESG</option>
+              <option value="tcfd">TCFD</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="qualGroup">نوع الشركات</label>
+            <select id="qualGroup">
+              <option value="nonListed">غير مقيدة بالبورصة</option>
+              <option value="listed">مقيدة بالبورصة</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="qualSector">القطاع (اختياري)</label>
+            <select id="qualSector">
+              <option value="">الكل</option>
+            </select>
+          </div>
+
+          <div class="field" style="display:flex;justify-content:flex-end;">
+            <button class="btn primary" id="qualReset" type="button" style="margin-top:auto;">إعادة ضبط</button>
+          </div>
+        </div>
+
+        <div class="badge" id="qualHint">
+          ✨ <span><b>ملاحظة:</b> يتم تحديث البطاقات والرسوم تلقائيًا حسب الفلاتر.</span>
+        </div>
+      </div>
+
+      <div class="grid" id="qualCards"></div>
+
+      <div class="grid" style="margin-top:14px;">
+        <div class="card">
+          <div class="cardTitle" id="qualPieTitle">التوزيع العام للتقييمات</div>
+          <div class="chartBox"><canvas id="qualPie"></canvas></div>
+        </div>
+        <div class="card">
+          <div class="cardTitle" id="qualBarTitle">توزيع التقييمات (أعمدة)</div>
+          <div class="chartBox"><canvas id="qualBar"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHITELIST -->
+    <section id="view-whitelist" class="view">
+      <div class="sectionTitle">
+        <div>القائمة البيضاء <span>أفضل الشركات أداءً (ESG 60% + TCFD 40%)</span></div>
+        <span class="pill">بحث + تصفية + ترتيب</span>
+      </div>
+
+      <div class="panel" style="margin-bottom:14px;">
+        <div class="filters">
+          <div class="field" style="grid-column: span 12;">
+            <label for="w_q">بحث</label>
+            <input id="w_q" type="search" placeholder="ابحث باسم الشركة أو القطاع..." />
+          </div>
+          <div class="field" style="grid-column: span 6;">
+            <label for="w_sector">القطاع</label>
+            <select id="w_sector">
+              <option value="">الكل</option>
+              <option>الطاقة</option>
+              <option>البنوك</option>
+              <option>الاتصالات</option>
+              <option>الصناعات</option>
+              <option>الزراعة والغذاء</option>
+            </select>
+          </div>
+          <div class="field" style="grid-column: span 6;">
+            <label for="w_status">حالة القيد</label>
+            <select id="w_status">
+              <option value="">الكل</option>
+              <option value="listed">مقيدة</option>
+              <option value="nonListed">غير مقيدة</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th>الترتيب</th>
+              <th>الشركة</th>
+              <th>القطاع</th>
+              <th>حالة القيد</th>
+              <th>درجة ESG</th>
+              <th>درجة TCFD</th>
+              <th>الدرجة الإجمالية</th>
+            </tr>
+          </thead>
+          <tbody id="w_rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    /* ===================== Tabs (Views) ===================== */
+    const views = ["home","quant","qual","whitelist"];
+    const tabs = document.querySelectorAll('#tabs a');
+    const header = document.getElementById('siteHeader');
+
+    function setHeaderH(){
+      const h = header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--headerH', `${Math.ceil(h)}px`);
+    }
+    window.addEventListener('resize', setHeaderH);
+    setHeaderH();
+
+    function show(view){
+      views.forEach(v=>{
+        document.getElementById('view-'+v).classList.toggle('active', v === view);
+      });
+      tabs.forEach(a=>{
+        a.classList.toggle('active', a.dataset.view === view);
+      });
+      setHeaderH();
+    }
+
+    function fromHash(){
+      const v = (location.hash || "#home").replace("#","");
+      show(views.includes(v) ? v : "home");
+    }
+    window.addEventListener('hashchange', fromHash);
+    fromHash();
+
+    /* ===================== Modal Countdown (30s) + Show Now ===================== */
+    const overlay = document.getElementById('overlay');
+    const countdownBox = document.getElementById('countdownBox');
+    const countdownN = document.getElementById('countdownN');
+    const closeModal = document.getElementById('closeModal');
+    const closeModal2 = document.getElementById('closeModal2');
+    const showNowBtn = document.getElementById('showNowBtn');
+
+    function hideModal(){ overlay.classList.remove('show'); }
+    function showModal(){
+      overlay.classList.add('show');
+      countdownBox.style.display = 'none';
+      if (timer) clearInterval(timer);
+    }
+
+    closeModal.addEventListener('click', hideModal);
+    closeModal2.addEventListener('click', hideModal);
+    overlay.addEventListener('click', (e)=>{ if(e.target === overlay) hideModal(); });
+    showNowBtn.addEventListener('click', showModal);
+
+    let seconds = 30;
+    countdownN.textContent = seconds;
+    let timer = setInterval(()=>{
+      seconds--;
+      countdownN.textContent = Math.max(0, seconds);
+      if(seconds <= 0){
+        clearInterval(timer);
+        showModal();
+      }
+    }, 1000);
+
+    /* ===================== Chart defaults ===================== */
+    Chart.defaults.font.family = 'Cairo, Tahoma, Arial, Segoe UI, sans-serif';
+    Chart.defaults.font.size = 13;
+
+    /* ===================== Quant Data + Charts ===================== */
+    const overallData = {
+      esg: { addressed: 489, compliant: 373, rate: 76 },
+      tcfd:{ addressed: 236, compliant: 167, rate: 70 }
+    };
+
+    const nonListedData = {
+      esgSectors: [
+        { name: 'قطاع سوق المال', addressed: 107, compliant: 42, rate: 39 },
+        { name: 'قطاع التأمين', addressed: 37, compliant: 34, rate: 92 },
+        { name: 'قطاع التمويل الاستهلاكي', addressed: 29, compliant: 20, rate: 69 },
+        { name: 'قطاع التمويل العقاري', addressed: 15, compliant: 13, rate: 86 },
+        { name: 'قطاع التأجير التمويلي', addressed: 33, compliant: 29, rate: 88 },
+        { name: 'قطاع التخصيم', addressed: 7, compliant: 4, rate: 57 },
+        { name: 'قطاع التمويل متناهي الصغر', addressed: 22, compliant: 16, rate: 72 }
+      ],
+      tcfdSectors: [
+        { name: 'قطاع سوق المال', addressed: 33, compliant: 13, rate: 39 },
+        { name: 'قطاع التأمين', addressed: 23, compliant: 12, rate: 52 },
+        { name: 'قطاع التمويل الاستهلاكي', addressed: 6, compliant: 4, rate: 66 },
+        { name: 'قطاع التمويل العقاري', addressed: 5, compliant: 3, rate: 60 },
+        { name: 'قطاع التأجير التمويلي', addressed: 16, compliant: 11, rate: 68 },
+        { name: 'قطاع التخصيم', addressed: 4, compliant: 2, rate: 50 },
+        { name: 'قطاع التمويل متناهي الصغر', addressed: 9, compliant: 3, rate: 33 }
+      ]
+    };
+
+    const listedData = {
+      esg: { addressed: 239, compliant: 215, rate: 90 },
+      tcfd:{ addressed: 140, compliant: 119, rate: 85 }
+    };
+
+    const quantColors = { addressed: '#005D87', compliant: '#8DCA4D' };
+    let quantCharts = {};
+
+    function initQuant(){
+      document.getElementById('q_esg_addressed').textContent = overallData.esg.addressed;
+      document.getElementById('q_esg_compliant').childNodes[0].textContent = overallData.esg.compliant;
+      document.getElementById('q_esg_rate').textContent = `معدل الالتزام: ${overallData.esg.rate}%`;
+
+      document.getElementById('q_tcfd_addressed').textContent = overallData.tcfd.addressed;
+      document.getElementById('q_tcfd_compliant').childNodes[0].textContent = overallData.tcfd.compliant;
+      document.getElementById('q_tcfd_rate').textContent = `معدل الالتزام: ${overallData.tcfd.rate}%`;
+
+      createOverallChart();
+      createNonListedESGChart();
+      createNonListedTCFDChart();
+      createListedOverallChart();
+    }
+
+    function createOverallChart(){
+      if(quantCharts.overall) quantCharts.overall.destroy();
+      const ctx = document.getElementById('overallChart').getContext('2d');
+      quantCharts.overall = new Chart(ctx,{
+        type:'bar',
+        data:{
+          labels:['ESG','TCFD'],
+          datasets:[
+            { label:'الشركات المخاطبة', data:[overallData.esg.addressed, overallData.tcfd.addressed], backgroundColor: quantColors.addressed, borderRadius: 10 },
+            { label:'الشركات الملتزمة', data:[overallData.esg.compliant, overallData.tcfd.compliant], backgroundColor: quantColors.compliant, borderRadius: 10 }
+          ]
+        },
+        options:{
+          responsive:true,
+          maintainAspectRatio:false,
+          plugins:{
+            legend:{ position:'top', rtl:true, labels:{ padding: 14 } },
+            tooltip:{
+              rtl:true,
+              callbacks:{
+                afterLabel:(context)=>{
+                  if(context.datasetIndex===1){
+                    const rate = context.dataIndex===0 ? overallData.esg.rate : overallData.tcfd.rate;
+                    return 'معدل الالتزام: ' + rate + '%';
+                  }
+                  return '';
+                }
+              }
+            }
+          },
+          scales:{ x:{ grid:{ display:false } }, y:{ beginAtZero:true } },
+          animation:{ duration: 900, easing:'easeOutQuart' }
+        }
+      });
+    }
+
+    function createNonListedESGChart(){
+      if(quantCharts.nonListedESG) quantCharts.nonListedESG.destroy();
+      const ctx = document.getElementById('nonListedESGChart').getContext('2d');
+      const labels = nonListedData.esgSectors.map(s=>s.name);
+      const addressed = nonListedData.esgSectors.map(s=>s.addressed);
+      const compliant = nonListedData.esgSectors.map(s=>s.compliant);
+      const rates = nonListedData.esgSectors.map(s=>s.rate);
+
+      quantCharts.nonListedESG = new Chart(ctx,{
+        type:'bar',
+        data:{ labels, datasets:[
+          { label:'الشركات المخاطبة', data: addressed, backgroundColor: quantColors.addressed, borderRadius: 10 },
+          { label:'الشركات الملتزمة', data: compliant, backgroundColor: quantColors.compliant, borderRadius: 10 }
+        ]},
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ position:'top', rtl:true }, tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> c.datasetIndex===1 ? ('معدل الالتزام: ' + rates[c.dataIndex] + '%') : '' } } },
+          scales:{ x:{ grid:{ display:false }, ticks:{ maxRotation:45, minRotation:45 } }, y:{ beginAtZero:true } },
+          animation:{ duration: 900, easing:'easeOutQuart' }
+        }
+      });
+    }
+
+    function createNonListedTCFDChart(){
+      if(quantCharts.nonListedTCFD) quantCharts.nonListedTCFD.destroy();
+      const ctx = document.getElementById('nonListedTCFDChart').getContext('2d');
+      const labels = nonListedData.tcfdSectors.map(s=>s.name);
+      const addressed = nonListedData.tcfdSectors.map(s=>s.addressed);
+      const compliant = nonListedData.tcfdSectors.map(s=>s.compliant);
+      const rates = nonListedData.tcfdSectors.map(s=>s.rate);
+
+      quantCharts.nonListedTCFD = new Chart(ctx,{
+        type:'bar',
+        data:{ labels, datasets:[
+          { label:'الشركات المخاطبة', data: addressed, backgroundColor: quantColors.addressed, borderRadius: 10 },
+          { label:'الشركات الملتزمة', data: compliant, backgroundColor: quantColors.compliant, borderRadius: 10 }
+        ]},
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ position:'top', rtl:true }, tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> c.datasetIndex===1 ? ('معدل الالتزام: ' + rates[c.dataIndex] + '%') : '' } } },
+          scales:{ x:{ grid:{ display:false }, ticks:{ maxRotation:45, minRotation:45 } }, y:{ beginAtZero:true } },
+          animation:{ duration: 900, easing:'easeOutQuart' }
+        }
+      });
+    }
+
+    function createListedOverallChart(){
+      if(quantCharts.listedOverall) quantCharts.listedOverall.destroy();
+      const ctx = document.getElementById('listedOverallChart').getContext('2d');
+      quantCharts.listedOverall = new Chart(ctx,{
+        type:'bar',
+        data:{
+          labels:['ESG','TCFD'],
+          datasets:[
+            { label:'الشركات المخاطبة', data:[listedData.esg.addressed, listedData.tcfd.addressed], backgroundColor: quantColors.addressed, borderRadius: 10 },
+            { label:'الشركات الملتزمة', data:[listedData.esg.compliant, listedData.tcfd.compliant], backgroundColor: quantColors.compliant, borderRadius: 10 }
+          ]
+        },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{
+            legend:{ position:'top', rtl:true },
+            tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> (c.datasetIndex===1 ? ('معدل الالتزام: ' + (c.dataIndex===0 ? listedData.esg.rate : listedData.tcfd.rate) + '%') : '') } }
+          },
+          scales:{ x:{ grid:{ display:false } }, y:{ beginAtZero:true } },
+          animation:{ duration: 900, easing:'easeOutQuart' }
+        }
+      });
+    }
+
+    /* ===================== Qual Data + Interactive ===================== */
+    const ratingKeys = ['excellent','veryGood','good','acceptable','needsImprovement'];
+    const ratingLabelsAr = ['ممتاز','جيد جدًا','جيد','مقبول','يحتاج إلى تحسين'];
+
+    const qualColors = {
+      excellent: '#002060',
+      veryGood: '#8DCA4D',
+      good: '#005D87',
+      acceptable: '#BD8D00',
+      needsImprovement: '#7C0000'
+    };
+    const ratingColors = [qualColors.excellent, qualColors.veryGood, qualColors.good, qualColors.acceptable, qualColors.needsImprovement];
+
+    const esgQual = {
+      nonListedSectors: [
+        { name: 'قطاع سوق المال', ratings: [4, 3, 5, 16, 14] },
+        { name: 'قطاع التأمين', ratings: [0, 1, 13, 16, 4] },
+        { name: 'قطاع التمويل العقاري', ratings: [2, 0, 4, 2, 5] },
+        { name: 'قطاع التمويل الاستهلاكي', ratings: [1, 1, 8, 6, 4] },
+        { name: 'قطاع التخصيم', ratings: [0, 0, 2, 2, 0] },
+        { name: 'قطاع التأجير التمويلي', ratings: [1, 1, 11, 8, 8] },
+        { name: 'قطاع التمويل متناهي الصغر', ratings: [0, 1, 6, 5, 4] }
+      ],
+      listedRatings: { excellent: 4, veryGood: 14, good: 45, acceptable: 104, needsImprovement: 48 },
+      listedSplit: {
+        nonBank: [2, 0, 6, 14, 8],
+        other:   [2, 14, 39, 90, 40]
+      }
+    };
+
+    const tcfdQual = {
+      nonListedSectors: [
+        { name: 'قطاع سوق المال', ratings: [0, 0, 4, 3, 6] },
+        { name: 'قطاع التأمين', ratings: [0, 0, 3, 6, 3] },
+        { name: 'قطاع التمويل العقاري', ratings: [0, 1, 1, 0, 1] },
+        { name: 'قطاع التمويل الاستهلاكي', ratings: [0, 0, 2, 1, 1] },
+        { name: 'قطاع التخصيم', ratings: [0, 0, 0, 0, 2] },
+        { name: 'قطاع التأجير التمويلي', ratings: [0, 0, 1, 5, 5] },
+        { name: 'قطاع التمويل متناهي الصغر', ratings: [0, 0, 0, 1, 2] }
+      ],
+      listedRatings: { excellent: 5, veryGood: 7, good: 15, acceptable: 49, needsImprovement: 43 },
+      listedSplit: {
+        nonBank: [1, 0, 1, 6, 8],
+        other:   [4, 7, 14, 43, 35]
+      }
+    };
+
+    const qualCharts = { pie:null, bar:null };
+
+    function pct(n, total){ return total ? Math.round((n/total)*100) : 0; }
+    function ratingsToObj(arr){
+      return { excellent: arr[0]||0, veryGood: arr[1]||0, good: arr[2]||0, acceptable: arr[3]||0, needsImprovement: arr[4]||0 };
+    }
+    function getQualDataset(metric){ return metric === 'esg' ? esgQual : tcfdQual; }
+
+    function aggregateNonListedBySector(data, sectorName){
+      if(sectorName){
+        const s = data.nonListedSectors.find(x=>x.name===sectorName);
+        return s ? ratingsToObj(s.ratings) : ratingsToObj([0,0,0,0,0]);
+      }
+      const sum=[0,0,0,0,0];
+      data.nonListedSectors.forEach(s=>s.ratings.forEach((v,i)=>sum[i]+=v));
+      return ratingsToObj(sum);
+    }
+
+    function fillSectorOptions(){
+      const metric = document.getElementById('qualMetric').value;
+      const group  = document.getElementById('qualGroup').value;
+      const sectorSel = document.getElementById('qualSector');
+      const data = getQualDataset(metric);
+
+      if(group === 'listed'){
+        const cur = sectorSel.value;
+        const opts = [
+          {v:'', t:'الكل (إجمالي المقيدة)'},
+          {v:'__nonBank__', t:'الخدمات المالية غير المصرفية'},
+          {v:'__other__',   t:'القطاعات الأخرى'}
+        ];
+        sectorSel.innerHTML = opts.map(o=>`<option value="${o.v}" ${o.v===cur?'selected':''}>${o.t}</option>`).join('');
+        return;
+      }
+
+      const cur = sectorSel.value;
+      sectorSel.innerHTML =
+        `<option value="">الكل</option>` +
+        data.nonListedSectors.map(s=>`<option value="${s.name}" ${s.name===cur?'selected':''}>${s.name}</option>`).join('');
+    }
+
+    function renderQual(){
+      const metric = document.getElementById('qualMetric').value;
+      const group  = document.getElementById('qualGroup').value;
+      const sector = document.getElementById('qualSector').value;
+
+      fillSectorOptions();
+
+      const data = getQualDataset(metric);
+
+      let ratingsObj;
+      let totalCount;
+      let subtitle = `${metric.toUpperCase()} • ${group==='listed'?'مقيدة بالبورصة':'غير مقيدة بالبورصة'}`;
+
+      if(group === 'listed'){
+        if(sector === '__nonBank__'){
+          ratingsObj = ratingsToObj(data.listedSplit.nonBank);
+          subtitle += ' • الخدمات المالية غير المصرفية';
+        }else if(sector === '__other__'){
+          ratingsObj = ratingsToObj(data.listedSplit.other);
+          subtitle += ' • القطاعات الأخرى';
+        }else{
+          ratingsObj = data.listedRatings;
+          subtitle += ' • إجمالي المقيدة';
+        }
+        totalCount = Object.values(ratingsObj).reduce((a,b)=>a+b,0);
+      }else{
+        ratingsObj = aggregateNonListedBySector(data, sector || "");
+        totalCount = Object.values(ratingsObj).reduce((a,b)=>a+b,0);
+        subtitle += sector ? ` • ${sector}` : ' • إجمالي غير المقيدة';
+      }
+
+      document.getElementById('qualPill').textContent = subtitle;
+      document.getElementById('qualPieTitle').textContent = `التوزيع العام للتقييمات — ${subtitle}`;
+      document.getElementById('qualBarTitle').textContent = `توزيع التقييمات (أعمدة) — ${subtitle}`;
+
+      document.getElementById('qualHint').innerHTML =
+        `✨ <span><b>عرض حالي:</b> ${subtitle} — يتم تحديث النتائج تلقائيًا حسب الفلاتر.</span>`;
+
+      const cards = document.getElementById('qualCards');
+      const totalCard = `
+        <div class="card">
+          <div class="cardTitle">إجمالي عدد الشركات</div>
+          <div class="cardValue">${totalCount}<small>${subtitle}</small></div>
+        </div>
+      `;
+      const ratingCards = ratingKeys.map((k, idx)=>{
+        const c = ratingsObj[k] || 0;
+        const p = pct(c, totalCount);
+        return `
+          <div class="card">
+            <div class="cardTitle">${ratingLabelsAr[idx]}</div>
+            <div class="cardValue" style="color:${ratingColors[idx]}">
+              ${c}
+              <small>النسبة: ${p}%</small>
+            </div>
+          </div>
+        `;
+      }).join('');
+      cards.innerHTML = totalCard + ratingCards;
+
+      const arr = ratingKeys.map(k=>ratingsObj[k] || 0);
+
+      if(qualCharts.pie) qualCharts.pie.destroy();
+      qualCharts.pie = new Chart(document.getElementById('qualPie'),{
+        type:'pie',
+        data:{ labels: ratingLabelsAr, datasets:[{ data: arr, backgroundColor: ratingColors }] },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{
+            legend:{ position:'top', rtl:true },
+            tooltip:{
+              rtl:true,
+              callbacks:{
+                label:(ctx)=>{
+                  const v = ctx.parsed;
+                  const t = ctx.dataset.data.reduce((a,b)=>a+b,0);
+                  const perc = t ? ((v/t)*100).toFixed(1) : 0;
+                  return `${ctx.label}: ${v} (${perc}%)`;
+                }
+              }
+            }
+          },
+          animation:{ animateRotate:true, animateScale:true }
+        }
+      });
+
+      if(qualCharts.bar) qualCharts.bar.destroy();
+      qualCharts.bar = new Chart(document.getElementById('qualBar'),{
+        type:'bar',
+        data:{ labels: ratingLabelsAr, datasets:[{ label:'عدد الشركات', data: arr, backgroundColor: ratingColors, borderRadius: 12 }] },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{ legend:{ display:false } },
+          scales:{ x:{ reverse:true, grid:{ display:false } }, y:{ beginAtZero:true } },
+          animation:{ duration:900, easing:'easeOutQuart' }
+        }
+      });
+    }
+
+    function initQual(){
+      const metricSel = document.getElementById('qualMetric');
+      const groupSel  = document.getElementById('qualGroup');
+      const sectorSel = document.getElementById('qualSector');
+
+      metricSel.addEventListener('change', ()=>{ fillSectorOptions(); renderQual(); });
+      groupSel.addEventListener('change',  ()=>{ fillSectorOptions(); renderQual(); });
+      sectorSel.addEventListener('change', renderQual);
+
+      document.getElementById('qualReset').addEventListener('click', ()=>{
+        metricSel.value = 'esg';
+        groupSel.value = 'nonListed';
+        fillSectorOptions();
+        sectorSel.value = '';
+        renderQual();
+      });
+
+      fillSectorOptions();
+      renderQual();
+    }
+
+    /* ===================== Whitelist ===================== */
+    const whiteListCompanies = [
+      {name:"شركة النيل للطاقة", sector:"الطاقة", status:"listed", esg:86, tcfd:78},
+      {name:"بنك الريادة", sector:"البنوك", status:"listed", esg:82, tcfd:80},
+      {name:"اتصالات الغد", sector:"الاتصالات", status:"nonListed", esg:79, tcfd:72},
+      {name:"الصناعات الخضراء", sector:"الصناعات", status:"listed", esg:88, tcfd:74},
+      {name:"مجموعة الغذاء المستدام", sector:"الزراعة والغذاء", status:"nonListed", esg:77, tcfd:69}
+    ];
+    const totalScore = (c)=> Math.round(0.6*c.esg + 0.4*c.tcfd);
+    const statusLabel = (s)=> s==="listed" ? "مقيدة" : "غير مقيدة";
+
+    function renderWhitelist(){
+      const q = document.getElementById('w_q').value.trim().toLowerCase();
+      const sector = document.getElementById('w_sector').value;
+      const status = document.getElementById('w_status').value;
+
+      const filtered = whiteListCompanies.filter(c=>{
+        const okQ = !q || c.name.toLowerCase().includes(q) || c.sector.toLowerCase().includes(q);
+        const okS = !sector || c.sector===sector;
+        const okT = !status || c.status===status;
+        return okQ && okS && okT;
+      });
+
+      const sorted = [...filtered].sort((a,b)=>totalScore(b)-totalScore(a));
+      const tbody = document.getElementById('w_rows');
+      tbody.innerHTML = '';
+      sorted.forEach((c,i)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${i+1}</td>
+          <td>${c.name}</td>
+          <td>${c.sector}</td>
+          <td><span class="chip ${c.status==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
+          <td>${c.esg}</td>
+          <td>${c.tcfd}</td>
+          <td><b>${totalScore(c)}</b></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* ===================== Init ===================== */
+    window.addEventListener('DOMContentLoaded', ()=>{
+      initQuant();
+      initQual();
+      renderWhitelist();
+
+      ['input','change'].forEach(evt=>{
+        document.getElementById('w_q').addEventListener(evt, renderWhitelist);
+        document.getElementById('w_sector').addEventListener(evt, renderWhitelist);
+        document.getElementById('w_status').addEventListener(evt, renderWhitelist);
+      });
+    });
+  </script>
+</body>
+</html>
