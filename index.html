@@ -570,7 +570,7 @@
           <a href="#home" data-view="home" class="active">الرئيسية</a>
           <a href="#quant" data-view="quant">التحليل الكمي</a>
           <a href="#qual" data-view="qual">التحليل الكيفي الفني</a>
-          <a href="#whitelist" data-view="whitelist">القائمة البيضاء</a>
+          <a href="#whitelist" data-view="whitelist">قائمة الأفضل أداءً</a>
         </nav>
 
         <div class="update">
@@ -1221,19 +1221,19 @@
 
     /* ===================== Whitelist ===================== */
     const whiteListCompanies = [
-      {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:"مقبول"},
-      {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:80},
-      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"nonListed", esg:"جيد جدًا" , tcfd:72},
-      {name:"الدلتا للسكر", sector:" سوق مال", status:"listed", esg:"ممتاز", tcfd:74},
-      {name:"طاقة عربية", sector:"سوق مال", status:"Listed", esg: "جيد جدًا", tcfd:69},
-      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"listed", esg:"جيد جدًا", tcfd:78},
-      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:80},
-      {name:"جي بي كوربوريشن", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:72},
-      {name:"الشرق الأوسط لصناعة الزجاج", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:74},
-      {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:69},
-      {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed", esg:"جيد جدًا", tcfd:72},
-      {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed", esg:"جيد جدًا", tcfd:74},
-      {name:"البنك التجاري الدولي «CIB» ", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:69}
+      {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed"},
+      {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed"},
+      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"nonListed"},
+      {name:"الدلتا للسكر", sector:" سوق مال", status:"listed"},
+      {name:"طاقة عربية", sector:"سوق مال", status:"Listed"},
+      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"listed"},
+      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"listed"},
+      {name:"جي بي كوربوريشن", sector:"سوق مال", status:"Listed"},
+      {name:"الشرق الأوسط لصناعة الزجاج", sector:"سوق مال", status:"listed"},
+      {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed"},
+      {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed"},
+      {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed"},
+      {name:"البنك التجاري الدولي «CIB» ", sector:"سوق مال", status:"Listed"}
     ];
     const totalScore = (c)=> Math.round(0.6*c.esg + 0.4*c.tcfd);
     const statusLabel = (s)=> s==="listed" ? "مقيدة" : "غير مقيدة";
@@ -1260,8 +1260,6 @@
           <td>${c.name}</td>
           <td>${c.sector}</td>
           <td><span class="chip ${c.status==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
-          <td>${c.esg}</td>
-          <td>${c.tcfd}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -1281,6 +1279,7 @@
   </script>
 </body>
 </html>
+
 
 
 
