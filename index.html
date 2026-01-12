@@ -15,8 +15,8 @@
     :root{
       --blue:#0B1E3B;
       --blue2:#102A52;
-      --yellow:#C8A100;      /* أصفر غامق */
-      --yellowHover:#B08C00; /* أغمق للهوفر */
+      --yellow:#C8A100;     
+      --yellowHover:#B08C00; 
       --green:#1BAA74;
 
       --bg:#F6F8FB;
@@ -56,7 +56,6 @@
     /* ✅ container responsive */
     .container{width:min(1200px, 92vw); margin:0 auto; padding-inline: 0;}
 
-    /* خلفية متحركة خفيفة */
     body::before{
       content:"";
       position:fixed; inset:0;
@@ -93,7 +92,7 @@
       margin-bottom:14px;
       padding-inline: 10px;
     }
-    /* ✅ حذف الإطار حول اللوجو */
+
     .brand img{
       width:min(360px, 85vw);
       height:auto;
@@ -128,7 +127,7 @@
       will-change: transform;
       white-space: nowrap;
     }
-    /* ✅ hover أصفر غامق للتابات */
+
     nav a:hover{
       background: rgba(200,161,0,.24);
       border-color: rgba(200,161,0,.70);
@@ -204,7 +203,6 @@
       margin-inline-start: 10px;
     }
 
-    /* ✅ Cards grid responsive (بدل span ثابت) */
     .grid{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -337,7 +335,6 @@
       border-color: rgba(200,161,0,.75);
     }
 
-    /* ✅ Chart height responsive */
     .chartBox{
       height: var(--chartH);
       width: 100%;
@@ -519,7 +516,6 @@
 
     /* ===================== Breakpoints ===================== */
 
-    /* ✅ large tablets / small laptops */
     @media (max-width: 992px){
       :root{
         --pad: 14px;
@@ -531,7 +527,6 @@
       table{min-width: 820px}
     }
 
-    /* ✅ tablets / big phones */
     @media (max-width: 768px){
       :root{
         --pad: 14px;
@@ -546,7 +541,6 @@
       .countdown .showNow{width:auto}
     }
 
-    /* ✅ small phones */
     @media (max-width: 480px){
       :root{
         --pad: 12px;
@@ -570,8 +564,7 @@
       <div class="top">
         <div class="brand">
           <img src="./لوجو الهيئة.png" alt="شعار الهيئة العامة للرقابة المالية">
-          <h1>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي</h1>
-          <small>(ESG &amp; TCFD)</small>
+          <h1>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</h1>
         </div>
 
         <nav id="tabs">
@@ -583,20 +576,19 @@
 
         <div class="update">
           <span class="dot"></span>
-          <span id="lastUpdate">آخر تحديث: 09/01/2026</span>
+          <span id="lastUpdate">آخر تحديث: 12/01/2026</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ✅ عدّ تنازلي + زر عرض فوري -->
   <div class="countdown" id="countdownBox" aria-live="polite">
     <div class="n" id="countdownN">30</div>
     <div>سيظهر <b>دليل الاستخدام</b> بعد ثوانٍ</div>
     <button class="showNow" id="showNowBtn" type="button">عرض الآن</button>
   </div>
 
-  <!-- نافذة التعليمات -->
+
   <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="تعليمات الاستخدام">
     <div class="modal">
       <div class="modalHead">
@@ -752,8 +744,7 @@
     <!-- WHITELIST -->
     <section id="view-whitelist" class="view">
       <div class="sectionTitle">
-        <div>القائمة البيضاء <span>أفضل الشركات أداءً (ESG 60% + TCFD 40%)</span></div>
-        <span class="pill">بحث + تصفية + ترتيب</span>
+        <div>القائمة البيضاء</div>
       </div>
 
       <div class="panel" style="margin-bottom:14px;">
@@ -766,11 +757,9 @@
             <label for="w_sector">القطاع</label>
             <select id="w_sector">
               <option value="">الكل</option>
-              <option>الطاقة</option>
-              <option>البنوك</option>
-              <option>الاتصالات</option>
-              <option>الصناعات</option>
-              <option>الزراعة والغذاء</option>
+              <option>سوق مال</option>
+              <option>التمويل</option>
+              <option>التأمين</option>
             </select>
           </div>
           <div class="field" style="grid-column: span 6;">
@@ -1246,7 +1235,7 @@
       {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed", esg:77, tcfd:69},
       {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed", esg:79, tcfd:72},
       {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed", esg:88, tcfd:74},
-      {name:"البنك التجاري الدولي «CIB»، ", sector:"سوق مال", status:"Listed", esg:77, tcfd:69}
+      {name:"البنك التجاري الدولي «CIB» ", sector:"سوق مال", status:"Listed", esg:77, tcfd:69}
     ];
     const totalScore = (c)=> Math.round(0.6*c.esg + 0.4*c.tcfd);
     const statusLabel = (s)=> s==="listed" ? "مقيدة" : "غير مقيدة";
@@ -1296,5 +1285,6 @@
   </script>
 </body>
 </html>
+
 
 
