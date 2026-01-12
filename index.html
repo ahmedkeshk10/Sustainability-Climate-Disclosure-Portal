@@ -783,7 +783,6 @@
               <th>حالة القيد</th>
               <th>درجة ESG</th>
               <th>درجة TCFD</th>
-              <th>الدرجة الإجمالية</th>
             </tr>
           </thead>
           <tbody id="w_rows"></tbody>
@@ -1223,19 +1222,19 @@
 
     /* ===================== Whitelist ===================== */
     const whiteListCompanies = [
-      {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed", esg:90, tcfd:78},
-      {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed", esg:82, tcfd:80},
-      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"nonListed", esg:79, tcfd:72},
-      {name:"الدلتا للسكر", sector:" سوق مال", status:"listed", esg:88, tcfd:74},
-      {name:"طاقة عربية", sector:"سوق مال", status:"Listed", esg:77, tcfd:69},
-      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"listed", esg:90, tcfd:78},
-      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"listed", esg:82, tcfd:80},
-      {name:"جي بي كوربوريشن", sector:"سوق مال", status:"Listed", esg:79, tcfd:72},
-      {name:"الشرق الأوسط لصناعة الزجاج", sector:"سوق مال", status:"listed", esg:88, tcfd:74},
-      {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed", esg:77, tcfd:69},
-      {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed", esg:79, tcfd:72},
-      {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed", esg:88, tcfd:74},
-      {name:"البنك التجاري الدولي «CIB» ", sector:"سوق مال", status:"Listed", esg:77, tcfd:69}
+      {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:78},
+      {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:80},
+      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"nonListed", esg:"جيد جدًا" , tcfd:72},
+      {name:"الدلتا للسكر", sector:" سوق مال", status:"listed", esg:"ممتاز", tcfd:74},
+      {name:"طاقة عربية", sector:"سوق مال", status:"Listed", esg: "جيد جدًا", tcfd:69},
+      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"listed", esg:"جيد جدًا", tcfd:78},
+      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:80},
+      {name:"جي بي كوربوريشن", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:72},
+      {name:"الشرق الأوسط لصناعة الزجاج", sector:"سوق مال", status:"listed", esg:"ممتاز", tcfd:74},
+      {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:69},
+      {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed", esg:"جيد جدًا", tcfd:72},
+      {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed", esg:"جيد جدًا", tcfd:74},
+      {name:"البنك التجاري الدولي «CIB» ", sector:"سوق مال", status:"Listed", esg:"جيد جدًا", tcfd:69}
     ];
     const totalScore = (c)=> Math.round(0.6*c.esg + 0.4*c.tcfd);
     const statusLabel = (s)=> s==="listed" ? "مقيدة" : "غير مقيدة";
@@ -1285,6 +1284,7 @@
   </script>
 </body>
 </html>
+
 
 
 
