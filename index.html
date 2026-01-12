@@ -776,7 +776,6 @@
         <table>
           <thead>
             <tr>
-              <th>الترتيب</th>
               <th>الشركة</th>
               <th>القطاع</th>
               <th>حالة القيد</th>
@@ -1254,7 +1253,6 @@
       sorted.forEach((c,i)=>{
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td>${i+1}</td>
           <td>${c.name}</td>
           <td>${c.sector}</td>
           <td><span class="chip ${c.status==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
@@ -1277,6 +1275,7 @@
   </script>
 </body>
 </html>
+
 
 
 
