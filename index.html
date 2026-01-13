@@ -766,7 +766,6 @@
           <thead>
             <tr>
               <th>الشركة</th>
-              <th>القطاع</th>
               <th>حالة القيد</th>
             </tr>
           </thead>
@@ -1243,7 +1242,6 @@
         const tr = document.createElement('tr');
         tr.innerHTML = `
           <td>${c.name}</td>
-          <td>${c.sector}</td>
           <td><span class="chip ${c.status==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
         `;
         tbody.appendChild(tr);
@@ -1264,6 +1262,7 @@
   </script>
 </body>
 </html>
+
 
 
 
