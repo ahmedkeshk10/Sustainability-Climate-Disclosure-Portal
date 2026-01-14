@@ -734,7 +734,31 @@
       <div class="sectionTitle">
         <div> قائمة الأفضل أداءً</div>
       </div>
-
+    <div class="panel" style="margin-bottom:14px;">
+        <div class="filters">
+          <div class="field" style="grid-column: span 12;">
+            <label for="w_q">بحث</label>
+            <input id="w_q" type="search" placeholder="ابحث باسم الشركة أو القطاع..." />
+          </div>
+          <div class="field" style="grid-column: span 6;">
+            <label for="w_sector">القطاع</label>
+            <select id="w_sector">
+              <option value="">الكل</option>
+              <option>سوق مال</option>
+              <option>التمويل</option>
+              <option>التأمين</option>
+            </select>
+          </div>
+          <div class="field" style="grid-column: span 6;">
+            <label for="w_status">حالة القيد</label>
+            <select id="w_status">
+              <option value="">الكل</option>
+              <option value="listed">مقيدة</option>
+              <option value="nonListed">غير مقيدة</option>
+            </select>
+          </div>
+        </div>
+      </div>
        
 
       <div class="tableWrap">
@@ -1238,6 +1262,7 @@
   </script>
 </body>
 </html>
+
 
 
 
