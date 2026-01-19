@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG & TCFD)</title>
+  <title> تقييمات إفصاحات الاستدامة والتغير المناخي (ESG & TCFD)</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -182,6 +182,7 @@
       font-weight: 700;
       line-height: 2;
       font-size: 14px;
+      text-align: justify;
     }
 
     .sectionTitle{
@@ -271,7 +272,6 @@
       white-space: nowrap;
     }
 
-    /* ✅ Filters responsive */
     .filters{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
@@ -437,7 +437,6 @@
       transform: translateY(-2px);
     }
 
-    /* Modal */
     .overlay{
       position: fixed;
       inset:0;
@@ -513,8 +512,6 @@
       background: rgba(11,30,59,.03);
     }
 
-    /* ===================== Breakpoints ===================== */
-
     @media (max-width: 992px){
       :root{
         --pad: 14px;
@@ -554,6 +551,35 @@
       table{min-width: 760px}
       th, td{padding: 10px; font-size: 12px}
     }
+
+    .pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  text-decoration: none;
+}
+
+.pdf-icon {
+  width: 100%;
+  height: 100%;
+  fill: #c62828; /* أحمر PDF */
+}
+
+.pdf-icon text {
+  fill: #fff;
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.pdf-btn:hover .pdf-icon {
+  opacity: 0.85;
+  transform: scale(1.05);
+  transition: 0.2s;
+}
+
   </style>
 </head>
 
@@ -563,7 +589,7 @@
       <div class="top">
         <div class="brand">
           <img src="./لوجو الهيئة.png" alt="شعار الهيئة العامة للرقابة المالية">
-          <h1>بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</h1>
+          <h1> تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</h1>
         </div>
 
         <nav id="tabs">
@@ -571,12 +597,9 @@
           <a href="#quant" data-view="quant">التحليل الكمي</a>
           <a href="#qual" data-view="qual">التحليل الكيفي الفني</a>
           <a href="#whitelist" data-view="whitelist">قائمة الأفضل أداءً</a>
+          <a href="link" data-view="whitelist">التقرير السنوي لنتائج تحليل الافصاحات</a>
         </nav>
 
-        <div class="update">
-          <span class="dot"></span>
-          <span id="lastUpdate">آخر تحديث: 12/01/2026</span>
-        </div>
       </div>
     </div>
   </header>
@@ -616,6 +639,16 @@
         <div class="article" style= "color:var(--blue);font-weight:900">
           مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري الهيئة العامة للرقابة المالية رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكمي والتحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
         </div>
+
+        <div class="ppx">
+  <a href="المنهجية المستخدمة في التحليل الفني.pdf" target="_blank" class="pdf-btn" title="عرض ملف PDF">
+    <svg viewBox="0 0 24 24" class="pdf-icon" aria-hidden="true">
+      <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+      <path d="M14 2v6h6"/>
+      <text x="7" y="18">PDF</text>
+    </svg>
+  </a>
+</div>
 
         <div class="badge" style= "color:var(--blue);font-weight:900">
          <span>نصيحة: ابدأ بـ <b>التحليل الكيفي الفني</b> ثم قارن بنتائج <b>التحليل الكمي</b> للحصول على صورة أشمل.</span>
@@ -1265,6 +1298,7 @@
   </script>
 </body>
 </html>
+
 
 
 
