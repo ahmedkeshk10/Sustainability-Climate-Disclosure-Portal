@@ -15,8 +15,8 @@
     :root{
       --blue:#0B1E3B;
       --blue2:#102A52;
-      --yellow:#C8A100;     
-      --yellowHover:#B08C00; 
+      --yellow:#C8A100;
+      --yellowHover:#B08C00;
       --green:#1BAA74;
 
       --bg:#F6F8FB;
@@ -32,7 +32,6 @@
 
       --anim: cubic-bezier(.16,1,.3,1);
 
-      /* ✅ Responsive sizes */
       --pad: 16px;
       --h1: 20px;
       --small: 14px;
@@ -340,6 +339,10 @@
       position: relative;
     }
 
+    .quantChartsSingleCol{
+      grid-template-columns: 1fr !important;
+    }
+
     .tableWrap{
       overflow:auto;
       border-radius: var(--r);
@@ -386,7 +389,6 @@
     .chip.mid{border-color: rgba(200,161,0,.40); background: rgba(200,161,0,.10); color: #6A5600}
     .chip.no{border-color: rgba(200,50,50,.35); background: rgba(200,50,50,.08); color: #7A1A1A}
 
-    /* Countdown */
     .countdown{
       position: fixed;
       inset-inline-start: 14px;
@@ -552,34 +554,51 @@
       th, td{padding: 10px; font-size: 12px}
     }
 
+    /* ✅ NEW: رصّ الـ badge مع أيقونة PDF جنب بعض */
+    .methodRow{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-top:12px;
+    }
+    .methodRow .badge{
+      flex: 1 1 auto;
+      margin-top: 0;
+    }
+    .methodRow .pdf-btn{
+      flex: 0 0 auto;
+    }
+
     .pdf-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 64px;
-  height: 64px;
-  text-decoration: none;
-}
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      text-decoration: none;
+    }
 
-.pdf-icon {
-  width: 100%;
-  height: 100%;
-  fill: #c62828; /* أحمر PDF */
-}
+    .pdf-icon {
+      width: 100%;
+      height: 100%;
+      fill: #c62828;
+    }
 
-.pdf-icon text {
-  fill: #fff;
-  font-size: 6px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
+    /* ✅ أوضح وتوسيط كلمة PDF */
+    .pdf-icon text {
+      fill: #ffffff;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
 
-.pdf-btn:hover .pdf-icon {
-  opacity: 0.85;
-  transform: scale(1.05);
-  transition: 0.2s;
-}
-
+    .pdf-btn:hover .pdf-icon {
+      opacity: 0.85;
+      transform: scale(1.05);
+      transition: 0.2s;
+    }
   </style>
 </head>
 
@@ -597,19 +616,18 @@
           <a href="#quant" data-view="quant">التحليل الكمي</a>
           <a href="#qual" data-view="qual">التحليل الكيفي الفني</a>
           <a href="#whitelist" data-view="whitelist">قائمة الأفضل أداءً</a>
-          <a href="./التقرير السنوي.pdf" data-view="whitelist">التقرير السنوي لنتائج تحليل الافصاحات</a>
+          <a href="./التقرير السنوي.pdf" target="_blank" rel="noopener" data-external="true">التقرير السنوي لنتائج تحليل الافصاحات</a>
         </nav>
 
       </div>
     </div>
   </header>
 
-   <div class="countdown" id="countdownBox" aria-live="polite">
+  <div class="countdown" id="countdownBox" aria-live="polite">
     <div class="n" id="countdownN">30</div>
     <div>سيظهر <b>دليل الاستخدام</b> بعد ثوانٍ</div>
     <button class="showNow" id="showNowBtn" type="button">عرض الآن</button>
   </div>
-
 
   <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="تعليمات الاستخدام">
     <div class="modal">
@@ -618,12 +636,14 @@
         <button class="closeX" id="closeModal" type="button" aria-label="إغلاق">×</button>
       </div>
       <div class="modalBody" id="modalBody">
-             <div style="margin-top:10px;color:var(--blue);font-weight:900;">
-    تتيح بوابة <b>تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</b> عرض نتائج تحليل جودة الإفصاحات من خلال مسارين رئيسيين: <b>التحليل الكيفي الفني</b> و<b>التحليل الكمي</b>.
-    وللاستفادة المثلى من مخرجات البوابة، يُوصى بالاطلاع على نتائج <b>التحليل الكيفي الفني</b> أولًا، ثم مقارنة النتائج بمخرجات <b>التحليل الكمي</b>.
-  </div>
-        <div style="margin-top:10px;">
-          في <b> قائمة الأفضل أداءً</b>: يمكنك البحث والتصفية وعرض أفضل الشركات وفقًا للدرجات.
+        <div style="margin-top:10px;color:var(--blue);font-weight:900;">
+          تتيح بوابة <b>تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</b> عرض نتائج تحليل جودة الإفصاحات من خلال <b>ثلاثة تبويبات رئيسية</b>، تشمل:
+          <b>التحليل الكيفي الفني</b>، <b>التحليل الكمي</b>، و<b>قائمة الأفضل أداءً</b>.
+          <br><br>
+          يُرجى التنقل بين هذه التبويبات للاطلاع على النتائج التفصيلية لكل مسار، حيث يُوصى بالبدء بتبويب
+          <b>التحليل الكيفي الفني</b> لفهم جودة محتوى الإفصاحات، ثم الانتقال إلى
+          <b>التحليل الكمي</b> لمراجعة مستويات الالتزام الشكلي، وأخيرًا الاطلاع على
+          <b>قائمة الأفضل أداءً</b> للتعرف على الشركات الأكثر تميزًا وفقًا لنتائج التحليل.
         </div>
       </div>
       <div class="modalFoot">
@@ -633,39 +653,35 @@
   </div>
 
   <main class="container">
-    <!-- HOME -->
     <section id="view-home" class="view active">
       <div class="panel">
-        <div class="article" style= "color:var(--blue);font-weight:900">
-          مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري الهيئة العامة للرقابة المالية رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكمي والتحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
+        <div class="article" style="color:var(--blue);font-weight:900">
+          مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت والمرفقات الداعمة، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري مجلس إدارة الهيئة رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكمي والتحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
         </div>
 
-      <div class="badge" style= "color:var(--blue);font-weight:900">
-         <span> للإطلاع <b>المنهجية المستخدمة في</b> تحليل <b> إفصاحات الاستدامة</b> والمناخ للشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية عن العام المالي 2024 يُرجى الضغط على الزرار بالأسفل</span>
+        <!-- ✅ UPDATED: badge + pdf icon جنب بعض -->
+        <div class="methodRow">
+          <div class="badge" style="color:var(--blue);font-weight:900">
+            <span> للإطلاع <b>المنهجية المستخدمة في</b> تحليل <b> إفصاحات الاستدامة</b> والمناخ للشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية عن العام المالي 2024 يُرجى الضغط على الزرار بالأسفل</span>
+          </div>
+
+          <a href="./المنهجية المستخدمة في التحليل الفني.pdf" target="_blank" class="pdf-btn" title="عرض ملف PDF">
+            <svg viewBox="0 0 24 24" class="pdf-icon" aria-hidden="true">
+              <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
+              <path d="M14 2v6h6"/>
+              <text x="12" y="16">PDF</text>
+            </svg>
+          </a>
         </div>
-        <div class="ppx">
-  <a href="./المنهجية المستخدمة في التحليل الفني.pdf" target="_blank" class="pdf-btn" title="عرض ملف PDF">
-    <svg viewBox="0 0 24 24" class="pdf-icon" aria-hidden="true">
-      <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/>
-      <path d="M14 2v6h6"/>
-      <text x="7" y="18">PDF</text>
-    </svg>
-  </a>
-</div>
+
       </div>
-      
-
-
-      
     </section>
 
-    <!-- QUANT -->
     <section id="view-quant" class="view">
       <div class="sectionTitle">
         <div>التحليل الكمي <span>قياس الالتزام الشكلي (Compliance Analysis)</span></div>
         <span class="pill">البيانات: ESG &amp; TCFD</span>
       </div>
-
 
       <div class="grid">
         <div class="card">
@@ -686,7 +702,7 @@
         </div>
       </div>
 
-      <div class="grid" style="margin-top:12px;">
+      <div class="grid quantChartsSingleCol" style="margin-top:12px;">
         <div class="card">
           <div class="cardTitle">التحليل العام لالتزام الشركات بإفصاحات الاستدامة والمناخ (ESG &amp; TCFD)</div>
           <div class="chartBox"><canvas id="overallChart"></canvas></div>
@@ -709,7 +725,6 @@
       </div>
     </section>
 
-    <!-- QUAL -->
     <section id="view-qual" class="view">
       <div class="sectionTitle">
         <div>التحليل الكيفي الفني <span>تقييم جودة المحتوى (Content Analysis)</span></div>
@@ -719,7 +734,7 @@
       <div class="panel" style="margin-bottom:14px;">
         <div class="filters wide">
           <div class="field">
-            <label for="qualMetric">المعيار</label>
+            <label for="qualMetric">التقرير</label>
             <select id="qualMetric">
               <option value="esg">ESG</option>
               <option value="tcfd">TCFD</option>
@@ -735,7 +750,7 @@
           </div>
 
           <div class="field">
-            <label for="qualSector">القطاع (اختياري)</label>
+            <label for="qualSector">القطاع </label>
             <select id="qualSector">
               <option value="">الكل</option>
             </select>
@@ -765,40 +780,19 @@
       </div>
     </section>
 
-    <!-- WHITELIST -->
     <section id="view-whitelist" class="view">
       <div class="sectionTitle">
         <div> قائمة الأفضل أداءً</div>
       </div>
-    <div class="panel" style="margin-bottom:14px;">
+
+      <div class="panel" style="margin-bottom:14px;">
         <div class="filters">
           <div class="field" style="grid-column: span 12;">
             <label for="w_q">بحث</label>
-            <input id="w_q" type="search" placeholder="ابحث باسم الشركة أو القطاع..." />
+            <input id="w_q" type="search" placeholder="ابحث باسم الشركة" />
           </div>
-          
-          <div class="field" style="grid-column: span 6;">
-            <label for="w_status">حالة القيد</label>
-            <select id="w_status">
-              <option value="">الكل</option>
-              <option value="listed">مقيدة</option>
-              <option value="nonListed">غير مقيدة</option>
-            </select>
-          </div>
-          
-          <div class="field" style="grid-column: span 6;">
-            <label for="w_sector">القطاع</label>
-            <select id="w_sector">
-              <option value="">الكل</option>
-              <option>سوق مال</option>
-              <option>التمويل</option>
-              <option>التأمين</option>
-            </select>
-          </div>
-
         </div>
       </div>
-       
 
       <div class="tableWrap">
         <table>
@@ -815,7 +809,6 @@
   </main>
 
   <script>
-   
     const views = ["home","quant","qual","whitelist"];
     const tabs = document.querySelectorAll('#tabs a');
     const header = document.getElementById('siteHeader');
@@ -832,7 +825,11 @@
         document.getElementById('view-'+v).classList.toggle('active', v === view);
       });
       tabs.forEach(a=>{
-        a.classList.toggle('active', a.dataset.view === view);
+        if (a.dataset.view) {
+          a.classList.toggle('active', a.dataset.view === view);
+        } else {
+          a.classList.remove('active');
+        }
       });
       setHeaderH();
     }
@@ -844,7 +841,6 @@
     window.addEventListener('hashchange', fromHash);
     fromHash();
 
-    /* ===================== Modal Countdown (30s) + Show Now ===================== */
     const overlay = document.getElementById('overlay');
     const countdownBox = document.getElementById('countdownBox');
     const countdownN = document.getElementById('countdownN');
@@ -875,11 +871,9 @@
       }
     }, 1000);
 
-    /* ===================== Chart defaults ===================== */
     Chart.defaults.font.family = 'Cairo, Tahoma, Arial, Segoe UI, sans-serif';
     Chart.defaults.font.size = 13;
 
-    /* ===================== Quant Data + Charts ===================== */
     const overallData = {
       esg: { addressed: 489, compliant: 373, rate: 76 },
       tcfd:{ addressed: 236, compliant: 167, rate: 70 }
@@ -911,7 +905,7 @@
       tcfd:{ addressed: 140, compliant: 119, rate: 85 }
     };
 
-    const quantColors = { addressed: '#005D87', compliant: '#8DCA4D' };
+    const quantColors = { addressed: '#0B1E3B', compliant: '#C8A100' };
     let quantCharts = {};
 
     function initQuant(){
@@ -1035,7 +1029,6 @@
       });
     }
 
-    /* ===================== Qual Data + Interactive ===================== */
     const ratingKeys = ['excellent','veryGood','good','acceptable','needsImprovement'];
     const ratingLabelsAr = ['ممتاز','جيد جدًا','جيد','مقبول','يحتاج إلى تحسين'];
 
@@ -1243,7 +1236,6 @@
       renderQual();
     }
 
-    /* ===================== Whitelist ===================== */
     const whiteListCompanies = [
       {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed"},
       {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed"},
@@ -1264,14 +1256,10 @@
 
     function renderWhitelist(){
       const q = document.getElementById('w_q').value.trim().toLowerCase();
-      const sector = document.getElementById('w_sector').value;
-      const status = document.getElementById('w_status').value;
 
       const filtered = whiteListCompanies.filter(c=>{
         const okQ = !q || c.name.toLowerCase().includes(q) || c.sector.toLowerCase().includes(q);
-        const okS = !sector || c.sector===sector;
-        const okT = !status || c.status===status;
-        return okQ && okS && okT;
+        return okQ;
       });
 
       const sorted = [...filtered].sort((a,b)=>totalScore(b)-totalScore(a));
@@ -1294,41 +1282,8 @@
 
       ['input','change'].forEach(evt=>{
         document.getElementById('w_q').addEventListener(evt, renderWhitelist);
-        document.getElementById('w_sector').addEventListener(evt, renderWhitelist);
-        document.getElementById('w_status').addEventListener(evt, renderWhitelist);
       });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
