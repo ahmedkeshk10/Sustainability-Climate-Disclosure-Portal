@@ -180,7 +180,7 @@
       color: var(--muted);
       font-weight: 700;
       line-height: 2;
-      font-size: 14px;
+      font-size: 16px;
       text-align: justify;
     }
 
@@ -254,7 +254,7 @@
       box-shadow: var(--shadow);
       color: var(--muted);
       font-weight: 800;
-      font-size: 12px;
+      font-size: 14px;
       margin-top: 12px;
     }
     .badge b{color: var(--blue)}
@@ -338,10 +338,6 @@
       height: var(--chartH);
       width: 100%;
       position: relative;
-    }
-
-    .quantChartsSingleCol{
-      grid-template-columns: 1fr !important;
     }
 
     .tableWrap{
@@ -555,7 +551,7 @@
       th, td{padding: 10px; font-size: 12px}
     }
 
-    /* ✅ NEW: رصّ الـ badge مع أيقونة PDF جنب بعض */
+    /* رصّ الـ badge مع أيقونة PDF جنب بعض */
     .methodRow{
       display:flex;
       align-items:center;
@@ -613,7 +609,6 @@
 
         <nav id="tabs">
           <a href="#home" data-view="home" class="active">الرئيسية</a>
-          <a href="#quant" data-view="quant">التحليل الكمي</a>
           <a href="#qual" data-view="qual">التحليل الكيفي الفني</a>
           <a href="#whitelist" data-view="whitelist">قائمة الأفضل أداءً</a>
           <a href="./التقرير السنوي.pdf" target="_blank" rel="noopener" data-external="true">التقرير السنوي لنتائج تحليل الافصاحات</a>
@@ -637,13 +632,14 @@
       </div>
       <div class="modalBody" id="modalBody">
         <div style="margin-top:10px;color:var(--blue);font-weight:900;">
-          تتيح بوابة <b>تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</b> عرض نتائج تحليل جودة الإفصاحات من خلال <b>ثلاثة تبويبات رئيسية</b>، تشمل:
-          <b>التحليل الكيفي الفني</b>، <b>التحليل الكمي</b>، و<b>قائمة الأفضل أداءً</b>.
+          تتيح بوابة <b>تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)</b> عرض نتائج تحليل جودة الإفصاحات من خلال <b>تبويبين رئيسيين</b>، تشمل:
+          <b>التحليل الكيفي الفني</b> و<b>قائمة الأفضل أداءً</b>.
           <br><br>
           يُرجى التنقل بين هذه التبويبات للاطلاع على النتائج التفصيلية لكل مسار، حيث يُوصى بالبدء بتبويب
-          <b>التحليل الكيفي الفني</b> لفهم جودة محتوى الإفصاحات، ثم الانتقال إلى
-          <b>التحليل الكمي</b> لمراجعة مستويات الالتزام الشكلي، وأخيرًا الاطلاع على
+          <b>التحليل الكيفي الفني</b> لفهم جودة محتوى الإفصاحات، وأخيرًا الاطلاع على
           <b>قائمة الأفضل أداءً</b> للتعرف على الشركات الأكثر تميزًا وفقًا لنتائج التحليل.
+          <br><br>
+          وللاطلاع على عرض تفصيلي وشامل لنتائج الإفصاحات، يمكن الضغط على تبويب التقرير السنوي.
         </div>
       </div>
       <div class="modalFoot">
@@ -656,7 +652,7 @@
     <section id="view-home" class="view active">
       <div class="panel">
         <div class="article" style="color:var(--blue);font-weight:900">
-          مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت والمرفقات الداعمة، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري مجلس إدارة الهيئة رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكمي والتحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
+          مرحبًا بك في بوابة تقييمات إفصاحات الاستدامة والتغير المناخي (ESG &amp; TCFD)، وهي منصة رقمية تفاعلية طورتها الهيئة العامة للرقابة المالية في إطار جهودها لتعزيز جودة الإفصاحات المتعلقة بالاستدامة والتغيرات المناخية، ودعم الشفافية ورفع كفاءة الممارسات الإفصاحية لدى الشركات الخاضعة للإشراف والرقابة. وانطلاقًا من إدراك الهيئة بأن قياس مدى الالتزام الشكلي بمتطلبات الإفصاح، رغم أهميته، لا يعكس بالضرورة جودة وفاعلية الإفصاحات المقدمة، فقد تم تبني نهج متكامل يجمع بين التحليل الكمي (Compliance analysis) لقياس مستويات الالتزام، والتحليل الكيفي الفني (Content analysis) لتقييم جودة محتوى الإفصاحات من حيث الدقة والوضوح والفاعلية والموثوقية والتوقيت والمرفقات الداعمة، بما يحقق الانتقال من مفهوم الالتزام إلى مفهوم الجودة الفعلية للإفصاح. وفي هذا الإطار، قامت الإدارة العامة للتنمية المستدامة بإعداد وتطبيق منهجية متكاملة لتقييم جودة إفصاحات الاستدامة والمناخ (ESG &amp; TCFD)، استنادًا إلى أفضل الممارسات الدولية، مع تكييفها لتتوافق مع بيئة الشركات المصرية والمتطلبات التنظيمية المحلية، وفقًا لقراري مجلس إدارة الهيئة رقمي 107 و108 لسنة 2021. وتعرض هذه البوابة نتائج التطبيق الفعلي لهذه المنهجية من خلال لوحة تفاعلية توضح مخرجات التحليل الكيفي الفني لإفصاحات الشركات المالية غير المصرفية والشركات المقيدة بالبورصة المصرية، بما يوفر أداة رقمية داعمة للمتابعة الرقابية وتحليل الأداء وتعزيز التحسين المستمر لجودة الإفصاحات بما يتسق مع المتطلبات التنظيمية وأفضل الممارسات الدولية في مجال الاستدامة والمناخ.
         </div>
 
         <div class="methodRow">
@@ -676,53 +672,7 @@
       </div>
     </section>
 
-    <section id="view-quant" class="view">
-      <div class="sectionTitle">
-        <div>التحليل الكمي <span>قياس الالتزام الشكلي (Compliance Analysis)</span></div>
-        <span class="pill">البيانات: ESG &amp; TCFD</span>
-      </div>
-
-      <div class="grid">
-        <div class="card">
-          <div class="cardTitle">عدد الشركات المخاطبة بـ ESG</div>
-          <div class="cardValue" id="q_esg_addressed">—</div>
-        </div>
-        <div class="card">
-          <div class="cardTitle">عدد الشركات الملتزمة بـ ESG</div>
-          <div class="cardValue" id="q_esg_compliant">—<small id="q_esg_rate">—</small></div>
-        </div>
-        <div class="card">
-          <div class="cardTitle">عدد الشركات المخاطبة بـ TCFD</div>
-          <div class="cardValue" id="q_tcfd_addressed">—</div>
-        </div>
-        <div class="card">
-          <div class="cardTitle">عدد الشركات الملتزمة بـ TCFD</div>
-          <div class="cardValue" id="q_tcfd_compliant">—<small id="q_tcfd_rate">—</small></div>
-        </div>
-      </div>
-
-      <div class="grid quantChartsSingleCol" style="margin-top:12px;">
-        <div class="card">
-          <div class="cardTitle">التحليل العام لالتزام الشركات بإفصاحات الاستدامة والمناخ (ESG &amp; TCFD)</div>
-          <div class="chartBox"><canvas id="overallChart"></canvas></div>
-        </div>
-
-        <div class="card">
-          <div class="cardTitle">الشركات غير المقيدة بالبورصة — ESG حسب القطاع المالي</div>
-          <div class="chartBox"><canvas id="nonListedESGChart"></canvas></div>
-        </div>
-
-        <div class="card">
-          <div class="cardTitle">الشركات غير المقيدة بالبورصة — TCFD حسب القطاع المالي</div>
-          <div class="chartBox"><canvas id="nonListedTCFDChart"></canvas></div>
-        </div>
-
-        <div class="card">
-          <div class="cardTitle">الشركات المقيدة بالبورصة — أداء الالتزام ESG &amp; TCFD</div>
-          <div class="chartBox"><canvas id="listedOverallChart"></canvas></div>
-        </div>
-      </div>
-    </section>
+    <!-- ✅ تم حذف تبويب التحليل الكمي بالكامل -->
 
     <section id="view-qual" class="view">
       <div class="sectionTitle">
@@ -808,7 +758,8 @@
   </main>
 
   <script>
-    const views = ["home","quant","qual","whitelist"];
+    // ✅ تحديث قائمة التبويبات بعد حذف التحليل الكمي
+    const views = ["home","qual","whitelist"];
     const tabs = document.querySelectorAll('#tabs a');
     const header = document.getElementById('siteHeader');
 
@@ -870,163 +821,9 @@
       }
     }, 1000);
 
+    // Chart.js defaults (لا يزال مستخدم في التحليل الكيفي)
     Chart.defaults.font.family = 'Cairo, Tahoma, Arial, Segoe UI, sans-serif';
     Chart.defaults.font.size = 13;
-
-    const overallData = {
-      esg: { addressed: 489, compliant: 373, rate: 76 },
-      tcfd:{ addressed: 236, compliant: 167, rate: 70 }
-    };
-
-    const nonListedData = {
-      esgSectors: [
-        { name: 'قطاع سوق المال', addressed: 107, compliant: 42, rate: 39 },
-        { name: 'قطاع التأمين', addressed: 37, compliant: 34, rate: 92 },
-        { name: 'قطاع التمويل الاستهلاكي', addressed: 29, compliant: 20, rate: 69 },
-        { name: 'قطاع التمويل العقاري', addressed: 15, compliant: 13, rate: 86 },
-        { name: 'قطاع التأجير التمويلي', addressed: 33, compliant: 29, rate: 88 },
-        { name: 'قطاع التخصيم', addressed: 7, compliant: 4, rate: 57 },
-        { name: 'قطاع التمويل متناهي الصغر', addressed: 22, compliant: 16, rate: 72 }
-      ],
-      tcfdSectors: [
-        { name: 'قطاع سوق المال', addressed: 33, compliant: 13, rate: 39 },
-        { name: 'قطاع التأمين', addressed: 23, compliant: 12, rate: 52 },
-        { name: 'قطاع التمويل الاستهلاكي', addressed: 6, compliant: 4, rate: 66 },
-        { name: 'قطاع التمويل العقاري', addressed: 5, compliant: 3, rate: 60 },
-        { name: 'قطاع التأجير التمويلي', addressed: 16, compliant: 11, rate: 68 },
-        { name: 'قطاع التخصيم', addressed: 4, compliant: 2, rate: 50 },
-        { name: 'قطاع التمويل متناهي الصغر', addressed: 9, compliant: 3, rate: 33 }
-      ]
-    };
-
-    const listedData = {
-      esg: { addressed: 239, compliant: 215, rate: 90 },
-      tcfd:{ addressed: 140, compliant: 119, rate: 85 }
-    };
-
-    const quantColors = { addressed: '#1A1C38', compliant: '#AE8634' };
-    let quantCharts = {};
-
-    function initQuant(){
-      document.getElementById('q_esg_addressed').textContent = overallData.esg.addressed;
-      document.getElementById('q_esg_compliant').childNodes[0].textContent = overallData.esg.compliant;
-      document.getElementById('q_esg_rate').textContent = `معدل الالتزام: ${overallData.esg.rate}%`;
-
-      document.getElementById('q_tcfd_addressed').textContent = overallData.tcfd.addressed;
-      document.getElementById('q_tcfd_compliant').childNodes[0].textContent = overallData.tcfd.compliant;
-      document.getElementById('q_tcfd_rate').textContent = `معدل الالتزام: ${overallData.tcfd.rate}%`;
-
-      createOverallChart();
-      createNonListedESGChart();
-      createNonListedTCFDChart();
-      createListedOverallChart();
-    }
-
-    function createOverallChart(){
-      if(quantCharts.overall) quantCharts.overall.destroy();
-      const ctx = document.getElementById('overallChart').getContext('2d');
-      quantCharts.overall = new Chart(ctx,{
-        type:'bar',
-        data:{
-          labels:['ESG','TCFD'],
-          datasets:[
-            { label:'الشركات المخاطبة', data:[overallData.esg.addressed, overallData.tcfd.addressed], backgroundColor: quantColors.addressed, borderRadius: 10 },
-            { label:'الشركات الملتزمة', data:[overallData.esg.compliant, overallData.tcfd.compliant], backgroundColor: quantColors.compliant, borderRadius: 10 }
-          ]
-        },
-        options:{
-          responsive:true,
-          maintainAspectRatio:false,
-          plugins:{
-            legend:{ position:'top', rtl:true, labels:{ padding: 14 } },
-            tooltip:{
-              rtl:true,
-              callbacks:{
-                afterLabel:(context)=>{
-                  if(context.datasetIndex===1){
-                    const rate = context.dataIndex===0 ? overallData.esg.rate : overallData.tcfd.rate;
-                    return 'معدل الالتزام: ' + rate + '%';
-                  }
-                  return '';
-                }
-              }
-            }
-          },
-          scales:{ x:{ grid:{ display:false } }, y:{ beginAtZero:true } },
-          animation:{ duration: 900, easing:'easeOutQuart' }
-        }
-      });
-    }
-
-    function createNonListedESGChart(){
-      if(quantCharts.nonListedESG) quantCharts.nonListedESG.destroy();
-      const ctx = document.getElementById('nonListedESGChart').getContext('2d');
-      const labels = nonListedData.esgSectors.map(s=>s.name);
-      const addressed = nonListedData.esgSectors.map(s=>s.addressed);
-      const compliant = nonListedData.esgSectors.map(s=>s.compliant);
-      const rates = nonListedData.esgSectors.map(s=>s.rate);
-
-      quantCharts.nonListedESG = new Chart(ctx,{
-        type:'bar',
-        data:{ labels, datasets:[
-          { label:'الشركات المخاطبة', data: addressed, backgroundColor: quantColors.addressed, borderRadius: 10 },
-          { label:'الشركات الملتزمة', data: compliant, backgroundColor: quantColors.compliant, borderRadius: 10 }
-        ]},
-        options:{
-          responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{ position:'top', rtl:true }, tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> c.datasetIndex===1 ? ('معدل الالتزام: ' + rates[c.dataIndex] + '%') : '' } } },
-          scales:{ x:{ grid:{ display:false }, ticks:{ maxRotation:45, minRotation:45 } }, y:{ beginAtZero:true } },
-          animation:{ duration: 900, easing:'easeOutQuart' }
-        }
-      });
-    }
-
-    function createNonListedTCFDChart(){
-      if(quantCharts.nonListedTCFD) quantCharts.nonListedTCFD.destroy();
-      const ctx = document.getElementById('nonListedTCFDChart').getContext('2d');
-      const labels = nonListedData.tcfdSectors.map(s=>s.name);
-      const addressed = nonListedData.tcfdSectors.map(s=>s.addressed);
-      const compliant = nonListedData.tcfdSectors.map(s=>s.compliant);
-      const rates = nonListedData.tcfdSectors.map(s=>s.rate);
-
-      quantCharts.nonListedTCFD = new Chart(ctx,{
-        type:'bar',
-        data:{ labels, datasets:[
-          { label:'الشركات المخاطبة', data: addressed, backgroundColor: quantColors.addressed, borderRadius: 10 },
-          { label:'الشركات الملتزمة', data: compliant, backgroundColor: quantColors.compliant, borderRadius: 10 }
-        ]},
-        options:{
-          responsive:true, maintainAspectRatio:false,
-          plugins:{ legend:{ position:'top', rtl:true }, tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> c.datasetIndex===1 ? ('معدل الالتزام: ' + rates[c.dataIndex] + '%') : '' } } },
-          scales:{ x:{ grid:{ display:false }, ticks:{ maxRotation:45, minRotation:45 } }, y:{ beginAtZero:true } },
-          animation:{ duration: 900, easing:'easeOutQuart' }
-        }
-      });
-    }
-
-    function createListedOverallChart(){
-      if(quantCharts.listedOverall) quantCharts.listedOverall.destroy();
-      const ctx = document.getElementById('listedOverallChart').getContext('2d');
-      quantCharts.listedOverall = new Chart(ctx,{
-        type:'bar',
-        data:{
-          labels:['ESG','TCFD'],
-          datasets:[
-            { label:'الشركات المخاطبة', data:[listedData.esg.addressed, listedData.tcfd.addressed], backgroundColor: quantColors.addressed, borderRadius: 10 },
-            { label:'الشركات الملتزمة', data:[listedData.esg.compliant, listedData.tcfd.compliant], backgroundColor: quantColors.compliant, borderRadius: 10 }
-          ]
-        },
-        options:{
-          responsive:true, maintainAspectRatio:false,
-          plugins:{
-            legend:{ position:'top', rtl:true },
-            tooltip:{ rtl:true, callbacks:{ afterLabel:(c)=> (c.datasetIndex===1 ? ('معدل الالتزام: ' + (c.dataIndex===0 ? listedData.esg.rate : listedData.tcfd.rate) + '%') : '') } }
-          },
-          scales:{ x:{ grid:{ display:false } }, y:{ beginAtZero:true } },
-          animation:{ duration: 900, easing:'easeOutQuart' }
-        }
-      });
-    }
 
     const ratingKeys = ['excellent','veryGood','good','acceptable','needsImprovement'];
     const ratingLabelsAr = ['ممتاز','جيد جدًا','جيد','مقبول','يحتاج إلى تحسين'];
@@ -1238,20 +1035,20 @@
     const whiteListCompanies = [
       {name:"مجموعة آي اف جي القابضة", sector:"سوق مال", status:"listed"},
       {name:" القلعة للاستثمارات المالية", sector:"سوق مال", status:"listed"},
-      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"nonListed"},
+      {name:"الإسكندرية للخدمات الطبية «المركز الطبي الجديد» ", sector:"سوق مال", status:"Listed"},
       {name:"الدلتا للسكر", sector:" سوق مال", status:"listed"},
       {name:"طاقة عربية", sector:"سوق مال", status:"Listed"},
       {name:"البنك التجاري الدولي «CIB»", sector:"سوق مال", status:"listed"},
-      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"listed"},
-      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"listed"},
+      {name:"كمل فينشرز لرأس مال المخاطر", sector:"سوق مال", status:"nonListed"},
+      {name:"التعمير للتمويل العقاري «الأولى»", sector:"سوق مال", status:"nonListed"},
       {name:"جي بي كوربوريشن", sector:"سوق مال", status:"Listed"},
       {name:"الشرق الأوسط لصناعة الزجاج", sector:"سوق مال", status:"listed"},
       {name:"العربية للأسمنت", sector:"سوق مال", status:"Listed"},
       {name:"مشروعي للتجارة", sector:"التمويل", status:"nonListed"},
       {name:"أوراسكوم للاستثمار القابضة", sector:"سوق مال", status:"listed"}
     ];
-    const totalScore = (c)=> Math.round(0.6*c.esg + 0.4*c.tcfd);
-    const statusLabel = (s)=> s==="listed" ? "مقيدة" : "غير مقيدة";
+
+    const statusLabel = (s)=> (String(s).toLowerCase()==="listed" ? "مقيدة" : "غير مقيدة");
 
     function renderWhitelist(){
       const q = document.getElementById('w_q').value.trim().toLowerCase();
@@ -1261,21 +1058,20 @@
         return okQ;
       });
 
-      const sorted = [...filtered].sort((a,b)=>totalScore(b)-totalScore(a));
       const tbody = document.getElementById('w_rows');
       tbody.innerHTML = '';
-      sorted.forEach((c,i)=>{
+      filtered.forEach((c)=>{
         const tr = document.createElement('tr');
+        const statusLower = String(c.status).toLowerCase();
         tr.innerHTML = `
           <td>${c.name}</td>
-          <td><span class="chip ${c.status==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
+          <td><span class="chip ${statusLower==='listed'?'ok':'mid'}">${statusLabel(c.status)}</span></td>
         `;
         tbody.appendChild(tr);
       });
     }
 
     window.addEventListener('DOMContentLoaded', ()=>{
-      initQuant();
       initQual();
       renderWhitelist();
 
@@ -1286,5 +1082,3 @@
   </script>
 </body>
 </html>
-
-
