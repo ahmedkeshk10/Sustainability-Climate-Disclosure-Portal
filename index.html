@@ -551,8 +551,6 @@
       table{min-width: 760px}
       th, td{padding: 10px; font-size: 12px}
     }
-
-    /* رصّ الـ badge مع أيقونة PDF جنب بعض */
     .methodRow{
       display:flex;
       align-items:center;
@@ -672,8 +670,6 @@
       </div>
     </section>
 
-    <!-- ✅ تم حذف تبويب التحليل الكمي بالكامل -->
-
     <section id="view-qual" class="view">
       <div class="sectionTitle">
         <div>التحليل الكيفي الفني <span>تقييم جودة المحتوى (Content Analysis)</span></div>
@@ -758,7 +754,6 @@
   </main>
 
   <script>
-    // ✅ تحديث قائمة التبويبات بعد حذف التحليل الكمي
     const views = ["home","qual","whitelist"];
     const tabs = document.querySelectorAll('#tabs a');
     const header = document.getElementById('siteHeader');
@@ -820,8 +815,6 @@
         showModal();
       }
     }, 1000);
-
-    // Chart.js defaults (لا يزال مستخدم في التحليل الكيفي)
     Chart.defaults.font.family = 'Cairo, Tahoma, Arial, Segoe UI, sans-serif';
     Chart.defaults.font.size = 13;
 
